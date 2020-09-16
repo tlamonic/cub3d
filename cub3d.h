@@ -15,14 +15,17 @@
 
 typedef	struct	s_map
 {
-	char		*EA;
-	char		*WE;
-	char		*SO;
-	char		*NO;
-	char		*S;
+	char 		**mapa;
+	char		EA[50];
+	char		WE[50];
+	char		SO[50];
+	char		NO[50];
+	char		S[50];
 	int			res[2];
 	int			F[3];
 	int			C[3];
 }				t_map;
+
+int 	errcheck(t_map *mapa);
 
 #endif
