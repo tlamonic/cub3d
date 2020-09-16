@@ -1,21 +1,14 @@
 #include "cub3d.h"
-#include "libft/ft_strchr.c"
+#include "libft/ft_strdup.c"
+#include <stdio.h>
 
-# define play "NSOW"
-
-int 	map(t_map *mapa, char *str)
+void 	map(t_map *map, const char *str)
 {
-	int		player;
+	//int 		i;
+	static int 	j;
 
-	player = 0;
-	while (*str)
-	{
-		if (ft_strchr(play, *str))
-		{
-			if (player)
-				return (0);
-			player = 1;
-		}
-		
-	}
+	//i = -1;
+	printf("%d\n", j);
+	*map->mapa = ft_strdup(str);
+	j++;
 }

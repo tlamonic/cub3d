@@ -4,7 +4,6 @@
 #include "gnl/get_next_line.c"
 #include "gnl/get_next_line_utils.c"
 #include "libft/ft_atoi.c"
-#include "libft/ft_strdup.c"
 #include "libft/ft_isspace.c"
 #include <stdio.h>
 #include "errcheck.c"
