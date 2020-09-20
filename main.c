@@ -47,6 +47,5 @@ int		main(int argc, char **argv)
 	}
 	if (parse(argv[1], &mapa))
 		return (0);
-	printf("%s\n", mapa.EA);
 	return (0);
 }

@@ -74,16 +74,18 @@ void	getinfo(char *str, t_map *mapa)
 {
 	if (*str == 'R' && *(str + 1) == ' ')
 		getres(str, mapa);
-	if (*str == 'F' && *(str + 1) == ' ')
+	else if (*str == 'F' && *(str + 1) == ' ')
 		getcolour(str, mapa->F);
-	if ((*str == 'N' || *str == 'S') && *(str + 1) == 'O')
+	else if ((*str == 'N' || *str == 'S') && *(str + 1) == 'O')
 		getwall(str, mapa);
-	if (*str == 'W' && *(str + 1) == 'E')
+	else if (*str == 'W' && *(str + 1) == 'E')
 		getwall(str, mapa);
-	if (*str == 'E' && *(str + 1) == 'A')
+	else if (*str == 'E' && *(str + 1) == 'A')
 		getwall(str, mapa);
-	if (*str == 'C' && *(str + 1) == ' ')
+	else if (*str == 'C' && *(str + 1) == ' ')
 		getcolour(str, mapa->C);
+	else if (*str == 10 || !str)
+		return ;
 	else
 		map(mapa, str);
 }
