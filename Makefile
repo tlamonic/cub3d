@@ -27,7 +27,7 @@ OBJS			= ${SRCS:.c=.o}
 INCLUDE 		= cube3d.h
 LIBFT 			= libft
 MINILIBX 		= miniLibX
-CC				= gcc -g -Wall -Wextra -Werror -fsanitize=address
+CC				= gcc -g -Wall -Wextra -Werror
 RM				= rm -f
 MLXFLAGS 		= -I ./miniLibX -L ./miniLibX -lmlx -framework OpenGl -framework Appkit
 LIBFLAGS 		= -I ./libft -L ./libft -L . ./libft/*.c 
