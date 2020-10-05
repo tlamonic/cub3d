@@ -18,7 +18,7 @@ int		check_map_characters(t_index *m)
 			m->parse.map_string[i] != '\n')
 		{
 			write(1, "Error\n", 6);
-			write(1, "Map countains wrong things\n", 27);
+			write(1, "Map contains wrong things\n", 26);
 			return (exit_all(m));
 		}
 		i++;

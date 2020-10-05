@@ -23,7 +23,7 @@ int		check_dir_letter(t_index *m)
 int		return_error_exit(t_index *m)
 {
 	write(1, "Error\n", 6);
-	write(1, "Map not surrounded by 1\n", 24);
+	write(1, "The map is not surrounded by 1\n", 31);
 	exit_all(m);
 	return (-1);
 }
@@ -67,8 +67,8 @@ int		check_borders_lines(t_index *m)
 	j = 0;
 	while (m->parse.map[m->parse.line_nbr - 1][j] != '\0')
 	{
-		if ((m->parse.map[m->parse.line_nbr - 1][j] != '1') &&
-			(m->parse.map[m->parse.line_nbr - 1][j] != ' '))
+		if (m->parse.map[m->parse.line_nbr - 1][j] != '1' &&
+			m->parse.map[m->parse.line_nbr - 1][j] != ' ')
 			return_error_exit(m);
 		j++;
 	}
