@@ -22,8 +22,6 @@
 # define MLXK_RIGHT 124
 # define MLXK_UP 126
 # define MLXK_DOWN 125
-# define MLXK_TD 14
-# define MLXK_TG 12
 
 typedef struct		s_win
 {

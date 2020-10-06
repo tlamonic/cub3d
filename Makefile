@@ -38,6 +38,7 @@ all:			libft_all minilibx_all ${NAME}
 $(NAME):		${OBJS} 
 				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a libmlx.a -I./ $(OBJS) -o $@ 
 clean:			libft_clean minilibx_clean
+				rm -rf cub3D.dSYM
 				@${RM} ${OBJS}
 fclean:			libft_fclean clean
 				@${RM} ${NAME}
