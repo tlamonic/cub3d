@@ -13,6 +13,7 @@ SRCS 			= ./srcs/main.c \
 					./parse/check_elements_errors.c \
 					./parse/check_map_errors.c \
 					./parse/check_map_errors2.c \
+					./parse/check_colors.c \
 					./srcs/keycode.c \
 					./srcs/init.c \
 					./srcs/init2.c \
@@ -22,7 +23,9 @@ SRCS 			= ./srcs/main.c \
 					./srcs/sprites2.c \
 					./srcs/exit.c \
 					./srcs/exit2.c \
-					./srcs/bmp.c 
+					./srcs/bmp.c \
+					./srcs/check_map.c
+
 OBJS			= ${SRCS:.c=.o}
 INCLUDE 		= cube3d.h
 LIBFT 			= libft

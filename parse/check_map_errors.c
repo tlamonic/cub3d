@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_errors.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/07 16:59:16 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/08 15:22:31 by tlamonic         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 int		check_map_characters(t_index *m)
@@ -28,14 +40,6 @@ int		check_map_characters(t_index *m)
 
 int		check_around(int i, int j, t_index *m)
 {
-	if (m->parse.map[i - 1][j + 1] == ' ')
-		return (-1);
-	if (m->parse.map[i - 1][j - 1] == ' ')
-		return (-1);
-	if (m->parse.map[i + 1][j - 1] == ' ')
-		return (-1);
-	if (m->parse.map[i + 1][j + 1] == ' ')
-		return (-1);
 	if (m->parse.map[i][j - 1] == ' ')
 		return (-1);
 	if (m->parse.map[i][j + 1] == ' ')
@@ -74,7 +78,10 @@ int		check_map_errors(t_index *m)
 	if (check_spaces_algo(m) < 0)
 		return (-1);
 	if (check_dir_letter(m) < 0)
+	{
+		write(1, "Error\nThere's no player on the map\n", 35);
 		return (-1);
+	}
 	if (check_map_characters(m) < 0)
 		return (-1);
 	return (1);

@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:28:35 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:28:36 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/08 14:53:33 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/08 14:56:02 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../cub3d.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+int		check_map(char *av)
 {
-	char		*d;
-	const char	*s;
+	const char	*st = ".cub";
 	int			i;
+	int			j;
 
-	d = dest;
-	s = src;
+	j = 0;
 	i = 0;
-	if (dest == NULL && src == NULL)
-		return (NULL);
-	if (dest == NULL)
-		return (NULL);
-	while (n--)
-	{
-		d[i] = s[i];
+	while (av[i])
 		i++;
+	i -= 4;
+	if (!av[i - 1])
+		return (-1);
+	while (av[i] && st[j] && av[i] == st[j])
+	{
+		i++;
+		j++;
 	}
-	return (dest);
+	if (av[i] || st[j])
+		return (-1);
+	return (1);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_elements.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/07 16:59:44 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/08 15:20:55 by tlamonic         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 void	create_hex_color(t_index *m)
@@ -62,6 +74,8 @@ int		get_elements(t_index *m)
 	if (get_floor_color(m) < 0)
 		return (-1);
 	if (get_ceilling_color(m) < 0)
+		return (-1);
+	if (check_colors(m) < 0)
 		return (-1);
 	create_hex_color(m);
 	if (!get_sprite_texture(m))

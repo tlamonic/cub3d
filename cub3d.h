@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/07 16:56:19 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/08 15:10:32 by tlamonic         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -11,7 +23,7 @@
 # include "./libft/libft.h"
 # include "./miniLibX/mlx.h"
 
-# define WINDOW_TITLE "cub3D"
+# define WINDOW_TITLE "kvadrat"
 # define MLXK_ESC 53
 # define MLXK_X 17
 # define MLXK_W 13
@@ -165,6 +177,8 @@ typedef struct		s_index
 
 void				create_algo(t_index *m);
 int					transform_to_hex(int r, int g, int b);
+int					check_colors(t_index *m);
+int					check_map(char *av);
 void				create_init(t_index *m);
 void				init_5(t_index *m);
 void				init_4(t_index *m);
