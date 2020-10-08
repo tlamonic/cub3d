@@ -6,7 +6,7 @@
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:59:39 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 16:59:41 by tlamonic         ###   ########.fr       */
+/*   Updated: 2020/10/08 15:29:43 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ int		calcul_digit(t_index *m, int i)
 	return (i);
 }
 
+void	fix_res(t_index *m)
+{
+	if (m->el.res_x < 50)
+		m->el.res_x = 50;
+	if (m->el.res_y < 50)
+		m->el.res_y = 50;
+}
+
 int		get_resolution(t_index *m)
 {
 	int	i;
@@ -63,5 +71,6 @@ int		get_resolution(t_index *m)
 			write_error_res();
 		i++;
 	}
+	fix_res(m);
 	return (1);
 }
