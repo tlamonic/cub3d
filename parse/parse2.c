@@ -6,7 +6,7 @@
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:01:33 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:01:34 by tlamonic         ###   ########.fr       */
+/*   Updated: 2020/10/08 19:53:19 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*create_new_line(char *str, int diff)
 		i++;
 		diff--;
 	}
+	free(str);
 	new[i] = '\0';
 	return (new);
 }

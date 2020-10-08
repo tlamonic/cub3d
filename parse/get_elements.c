@@ -6,7 +6,7 @@
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:59:44 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/08 15:20:55 by tlamonic         ###   ########.fr       */
+/*   Updated: 2020/10/08 21:16:53 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@ int		check_letters(t_index *m, int i, int j)
 		m->el.resolution_line = i;
 	if (m->el.elem[i][j] == 'N')
 		m->el.north_line = i;
-	if (m->el.elem[i][j] == 'S')
-	{
-		if (m->el.elem[i][j + 1] == 'O')
-			m->el.south_line = i;
-		else
-			m->el.sprite_line = i;
-	}
+	if (m->el.elem[i][j] == 'S' && m->el.elem[i][j + 1] == 'O')
+		m->el.south_line = i;
+	else if (m->el.elem[i][j] == 'S')
+		m->el.sprite_line = i;
 	if (m->el.elem[i][j] == 'W')
 		m->el.west_line = i;
 	if (m->el.elem[i][j] == 'E')
