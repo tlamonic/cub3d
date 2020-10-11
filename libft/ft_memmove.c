@@ -5,33 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:28:41 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:28:42 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/11 19:26:07 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/11 19:26:09 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char		*d;
-	const char	*s;
-	char		*lastd;
-	const char	*lasts;
+	size_t		i;
+	char		*ds;
+	const char	*sr;
 
-	d = dst;
-	s = src;
-	lastd = d + (len - 1);
-	lasts = s + (len - 1);
-	if (dst == NULL && src == NULL)
+	if (dest == NULL && src == NULL)
 		return (NULL);
-	if (d < s)
-	{
-		while (len--)
-			*d++ = *s++;
-	}
+	i = -1;
+	ds = (char *)dest;
+	sr = (char *)src;
+	if (ds > sr)
+		while (++i < n)
+			ds[n - i - 1] = sr[n - i - 1];
 	else
-		while (len--)
-			*lastd-- = *lasts--;
-	return (dst);
+		while (++i < n)
+			ds[i] = sr[i];
+	return (ds);
 }

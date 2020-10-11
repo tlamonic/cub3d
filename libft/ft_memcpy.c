@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:28:35 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:28:36 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/11 19:26:01 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/11 19:26:02 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char		*d;
-	const char	*s;
-	int			i;
+	size_t	i;
+	char	*ds;
+	char	*sr;
 
-	d = dest;
-	s = src;
-	i = 0;
 	if (dest == NULL && src == NULL)
-		return (NULL);
-	if (dest == NULL)
-		return (NULL);
-	while (n--)
+		return (0);
+	i = 0;
+	ds = (char *)dest;
+	sr = (char *)src;
+	while (i < n)
 	{
-		d[i] = s[i];
+		ds[i] = sr[i];
 		i++;
 	}
-	return (dest);
+	return (ds);
 }

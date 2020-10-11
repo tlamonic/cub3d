@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:17:44 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:17:45 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/11 19:21:36 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/11 19:21:37 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,14 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	ft_memset(s, 0, n);
+	size_t	i;
+	char	*str;
+
+	i = 0;
+	str = (char *)s;
+	while (i < n)
+	{
+		str[i] = '\0';
+		i++;
+	}
 }

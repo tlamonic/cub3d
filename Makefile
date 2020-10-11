@@ -1,71 +1,49 @@
-NAME 			= cub3D
-LIBFT_PATH 		= ./libft
-MINILIBX_PATH   = ./miniLibX
-SRCS 			= ./srcs/main.c \
-					./parse/parse.c \
-					./parse/parse2.c \
-					./parse/get_elements.c \
-					./parse/get_elem_resolution.c \
-					./parse/get_elem_floor.c \
-					./parse/get_elem_ceilling.c \
-					./parse/get_textures.c \
-					./parse/get_sprites.c \
-					./parse/check_elements_errors.c \
-					./parse/check_map_errors.c \
-					./parse/check_map_errors2.c \
-					./parse/check_colors.c \
-					./srcs/keycode.c \
-					./srcs/init.c \
-					./srcs/init2.c \
-					./srcs/textures.c \
-					./srcs/main_algo.c \
-					./srcs/sprites.c \
-					./srcs/sprites2.c \
-					./srcs/exit.c \
-					./srcs/exit2.c \
-					./srcs/bmp.c \
-					./srcs/check_map.c
+NAME = cub3D
 
-OBJS			= ${SRCS:.c=.o}
-INCLUDE 		= cube3d.h
-LIBFT 			= libft
-MINILIBX 		= miniLibX
-CC				= gcc -g -Wall -Wextra -Werror
-RM				= rm -f
-MLXFLAGS 		= -I ./miniLibX -L ./miniLibX -lmlx -framework OpenGl -framework Appkit
-LIBFLAGS 		= -I ./libft -L ./libft -L . ./libft/*.c 
-# -I Add the directory dir to the list of directories to be searched for header files
-# -L Searches the library when linking
+HEAD = cub3d.h
 
-all:			libft_all minilibx_all ${NAME}
-$(NAME):		${OBJS} 
-				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a libmlx.a -I./ $(OBJS) -o $@ 
-clean:			libft_clean minilibx_clean
-				rm -rf cub3D.dSYM
-				@${RM} ${OBJS}
-fclean:			libft_fclean clean
-				@${RM} ${NAME}
-re:				fclean all
+SRCS = main.c get_next_line.c get_next_line_utils.c \
+		parser.c ft_move.c put_window.c \
+		put_text.c ft_setfloorcollor.c setdata.c \
+		parser_utils.c parser_check_map.c put_sprite.c \
+		setdata_utils.c put_window_utils.c my_pixel_put.c \
+		put_sprite_utils_1.c put_sprite_utils_2.c \
+		parser_utils_1.c ft_putsprite.c inittexture.c \
+		error1.c error2.c error3.c error4.c error5.c \
+		ft_setfloorcollor_utils.c somefree.c mybmp.c \
+		mybmp_utils.c put_screen.c mapcheck.c stepdda.c \
+		parser_utils_0.c 
 
-# make other makefiles compile with the -C flag
-# The -C flag makes you go to the appropriate path and do the asked command
-libft_all:
-	make -C $(LIBFT_PATH) all
-	cp ./libft/libft.a libft.a
+SRCO = main.o get_next_line.o get_next_line_utils.o \
+		parser.o ft_move.o put_window.o \
+		put_text.o ft_setfloorcollor.o setdata.o \
+		parser_utils.o parser_check_map.o put_sprite.o \
+		setdata_utils.o put_window_utils.o my_pixel_put.o \
+		put_sprite_utils_1.o put_sprite_utils_2.o \
+		parser_utils_1.o ft_putsprite.o inittexture.o \
+		error1.o error2.o error3.o error4.o error5.o \
+		ft_setfloorcollor_utils.o somefree.o mybmp.o \
+		mybmp_utils.o put_screen.o mapcheck.o stepdda.o \
+		parser_utils_0.o 
 
-libft_clean:
-	make -C $(LIBFT_PATH) clean
 
-libft_fclean:
-	make -C $(LIBFT_PATH) fclean
-	$(RM) libft.a
+all: $(SRCO) $(HEAD)
+	cd ./libft && make bonus && cd ..
+	cd minilibx_mms && make && mv libmlx.dylib ../ && cd ..
+	gcc $(SRCO) -o $(NAME) libmlx.dylib -g -framework OpenGL -framework Appkit libft/libft.a
 
-minilibx_all:
-	make -C $(MINILIBX_PATH) all
-	cp ./minilibX/libmlx.a libmlx.a
+$(SRCO): %.o:%.c
+	gcc -Wall -Wextra -Werror -c $< -o $@
 
-minilibx_clean:
-	make -C $(MINILIBX_PATH) clean
-	$(RM) libmlx.a
-				
-.PHONY: all fclean clean re
+clean:
+	/bin/rm -f $(SRCO)
+	cd ./libft && make fclean && cd ..
+	/bin/rm -f libmlx.dylib
+
+fclean: clean
+	/bin/rm -f $(NAME)
+	/bin/rm -f screenshot.bmp
+
+re: fclean all
+
+.PHONY: $(NAME) clean fclean re all

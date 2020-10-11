@@ -5,31 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:28:15 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:28:15 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/11 19:23:36 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/11 19:23:38 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
-	unsigned char	*d;
-	unsigned char	*s;
-	unsigned char	p;
 	size_t			i;
+	unsigned char	*ds;
+	unsigned char	*sr;
+	unsigned char	cc;
 
-	d = (unsigned char *)dst;
-	s = (unsigned char *)src;
-	p = (unsigned char)c;
+	if (dest == NULL && src == NULL)
+		return (0);
 	i = 0;
-	while (i < n && (i == 0 || ((i > 0) && s[i - 1] != p)))
+	cc = (unsigned char)c;
+	ds = (unsigned char *)dest;
+	sr = (unsigned char *)src;
+	while (i < n)
 	{
-		d[i] = s[i];
+		ds[i] = sr[i];
+		if (ds[i] == cc)
+			return (ds + 1 + i);
 		i++;
 	}
-	if (i > 0 && s[i - 1] == p)
-		return (d + i);
-	else
-		return (NULL);
+	return (NULL);
 }

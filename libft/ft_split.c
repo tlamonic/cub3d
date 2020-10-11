@@ -5,69 +5,94 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:29:31 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:29:33 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/11 19:27:01 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/11 19:27:02 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_nbwords(const char *s, char c)
+static int	ft_countrow(char const *s, char c)
 {
-	int		nb;
-	int		i;
+	int	row;
 
-	nb = 0;
-	i = 0;
-	while (*s != '\0')
-	{
-		if (i == 1 && *s == c)
-			i = 0;
-		if (i == 0 && *s != c)
-		{
-			i = 1;
-			nb++;
-		}
+	row = 1;
+	while (*s == c && *s)
 		s++;
-	}
-	return (nb);
-}
-
-static int	ft_wordlen(const char *s, char c, int i)
-{
-	int		len;
-
-	len = 0;
-	while (s[i + len] != c && s[i + len] != '\0')
-		len++;
-	return (len);
-}
-
-char		**ft_strsplit(const char *s, char c)
-{
-	char	**tab;
-	int		i;
-	int		k;
-	int		len;
-	int		nb_words;
-
-	if (!s || !c)
-		return (NULL);
-	i = -1;
-	k = 0;
-	nb_words = ft_nbwords((const char *)s, c);
-	if (!(tab = (char **)malloc(sizeof(*tab) * (nb_words + 1))))
-		return (NULL);
-	while (s[++i] != '\0')
+	while (*s)
 	{
-		if (s[i] != c)
+		if (*s == c)
 		{
-			len = ft_wordlen(s, c, i);
-			if (!(tab[k++] = ft_substr(s, i, len)))
-				return (ft_free(tab, k));
-			i = i + len - 1;
+			while (*s == c)
+				s++;
+			if (*s != '\0')
+				row++;
+		}
+		else
+			s++;
+	}
+	return (row);
+}
+
+static int	ft_len(const char *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while ((*s != c) && (*s))
+	{
+		s++;
+		i++;
+	}
+	return (i);
+}
+
+static void	ft_freearr(char **str, int row)
+{
+	while (row >= 0)
+	{
+		free(str[row]);
+		row--;
+	}
+	free(str);
+}
+
+static char	**ft_ilovemy26lines(char **str, char c, int row, const char *s)
+{
+	int	i;
+	int	len;
+
+	i = -1;
+	while (i++ < row)
+	{
+		while (*s == c && *s)
+			s++;
+		len = ft_len(s, c);
+		if (*s == '\0')
+			str[i] = NULL;
+		else
+		{
+			if (!(str[i] = ft_substr(s, 0, len)))
+			{
+				ft_freearr(str, i);
+				return (NULL);
+			}
+			s = s + len;
 		}
 	}
-	tab[k] = NULL;
-	return (tab);
+	return (str);
+}
+
+char		**ft_split(char const *s, char c)
+{
+	char	**str;
+	int		row;
+
+	if ((!(s)) || !(row = ft_countrow(s, c)))
+		return (NULL);
+	if (!(str = (char **)ft_calloc(sizeof(char *), row + 1)))
+		return (NULL);
+	if (!(str = ft_ilovemy26lines(str, c, row, s)))
+		return (NULL);
+	return (str);
 }

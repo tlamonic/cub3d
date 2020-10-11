@@ -5,50 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:17:37 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:17:38 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/11 19:21:28 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/11 19:21:29 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_manage_longmin(unsigned long result, int count)
+static int	ft_atoibig(const char *nptr, int *minus)
 {
-	int value;
+	int		len;
 
-	if (count % 2 != 0)
-		value = -1;
-	else
-		value = 1;
-	if (value == -1 && result > 2147483648)
-		return (0);
-	else if (value == 1 && result > 2147483647)
-		result = (-1);
-	return (result * value);
+	len = 0;
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		len++;
+		nptr++;
+		if (len > 19 && *minus == 1)
+			return (1);
+		if (len > 19 && *minus == -1)
+		{
+			*minus = 0;
+			return (2);
+		}
+	}
+	if (len == 0)
+		return (1);
+	return (0);
 }
 
-int	ft_atoi(const char *str)
+int			ft_atoi(const char *nptr)
 {
-	int				i;
-	int				count;
-	unsigned long	result;
+	int		a;
+	int		minus;
 
-	i = 0;
-	count = 0;
-	result = 0;
-	while (str[i] == '\t' || str[i] == '\v' || str[i] == '\n' ||
-	str[i] == '\r' || str[i] == '\f' || str[i] == ' ')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	a = 0;
+	while (*nptr && (*nptr == '\n' || *nptr == '\t' || *nptr == ' ' ||
+			*nptr == '\v' || *nptr == '\f' || *nptr == '\r'))
+		nptr++;
+	minus = 1;
+	if (*nptr == '+' || *nptr == '-')
 	{
-		if (str[i] == '-')
-			count++;
-		i++;
+		if (*nptr == '-')
+			minus = -1;
+		nptr++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	if (ft_atoibig(nptr, &minus) > 0)
+		return (-1);
+	while (*nptr >= '0' && *nptr <= '9')
 	{
-		result = (result * 10) + str[i] - '0';
-		i++;
+		a = a * 10 + *nptr - '0';
+		nptr++;
 	}
-	return (ft_manage_longmin(result, count));
+	return (a * minus);
 }

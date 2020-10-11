@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:19:37 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:19:41 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/11 19:21:52 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/11 19:21:54 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	ft_isalnum(int c)
 {
 	if (ft_isalpha(c) || ft_isdigit(c))
-		return (1);
+		return (8);
 	return (0);
 }

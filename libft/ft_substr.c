@@ -5,36 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:31:43 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:31:44 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/11 19:28:52 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/11 19:28:52 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+static int	ft_strlensub(char const *s, int start, int len)
 {
-	char	*dest;
-	int		i;
+	int	i;
 
-	if (len <= 0 || s == NULL)
-		return (NULL);
-	if (start > ft_strlen(s))
+	i = 0;
+	while (s[start + i] && i < len)
+		i++;
+	return (i);
+}
+
+char		*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char			*str;
+	unsigned	int	min;
+	unsigned	int	i;
+
+	if (!s)
+		return (0);
+	if (start >= ft_strlen(s))
 	{
-		if (!(dest = (char *)malloc(sizeof(char))))
+		if (!(str = ft_calloc(1, sizeof(char))))
 			return (0);
-		dest[0] = '\0';
-		return (dest);
+		return (str);
 	}
-	if (!(dest = (char *)malloc(sizeof(char) * len + 1)))
+	min = ft_strlen(s) - start;
+	if (min < len)
+		len = min;
+	i = ft_strlensub(s, start, len);
+	if (!(str = ft_calloc(sizeof(char ), i + 1)))
 		return (0);
 	i = 0;
-	while (len > 0)
+	while (s[start + i] && i < len)
 	{
-		dest[i] = s[i + start];
+		str[i] = s[start + i];
 		i++;
-		len--;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (str);
 }

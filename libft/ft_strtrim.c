@@ -5,31 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:31:35 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:31:36 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/11 19:28:44 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/11 19:28:45 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+static int	ft_strlentrim(int i, int j)
 {
-	size_t	beg;
-	size_t	end;
-	char	*new;
+	int k;
 
-	if (!s1 || !set)
+	k = 0;
+	while (i < j + 1)
+	{
+		k++;
+		i++;
+	}
+	return (k);
+}
+
+char		*ft_strtrim(char const *s1, char const *set)
+{
+	char	*str;
+	int		i;
+	int		j;
+	int		k;
+
+	if (s1 == NULL)
 		return (NULL);
-	beg = 0;
-	while (s1[beg] && ft_strchr(set, s1[beg]))
-		beg++;
-	end = ft_strlen(s1 + beg);
-	if (end)
-		while (s1[end + beg - 1] != 0 && ft_strchr(set, s1[end + beg - 1]) != 0)
-			end--;
-	if (!(new = malloc(sizeof(char) * end + 1)))
+	j = ft_strlen(s1);
+	i = 0;
+	while (s1[i] && ft_strchr(set, s1[i]))
+		i++;
+	while (j && ft_strchr(set, s1[j]))
+		j--;
+	if (!(str = malloc(sizeof(char ) * ft_strlentrim(i, j) + 1)))
 		return (NULL);
-	ft_strncpy(new, s1 + beg, end);
-	new[end] = '\0';
-	return (new);
+	k = 0;
+	while (i < j + 1)
+	{
+		str[k] = s1[i];
+		k++;
+		i++;
+	}
+	str[k] = '\0';
+	return (str);
 }
