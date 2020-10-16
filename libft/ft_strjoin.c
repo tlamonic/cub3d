@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:27:32 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:27:33 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:30:25 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:30:26 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *str;
+	char	*result;
+	int		i;
 
-	if (!s1 || !s2)
-		return (0);
-	if (!(str = malloc(sizeof(char ) * (ft_strlen(s1) + ft_strlen(s2)) + 1)))
-		return (0);
-	ft_bzero(str, ft_strlen(s1) + ft_strlen(s2) + 1);
-	ft_strlcat(str, s1, -1);
-	ft_strlcat(str, s2, -1);
-	return (str);
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	result = (char *)malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (result == NULL)
+		return (NULL);
+	i = 0;
+	while (*s1)
+		result[i++] = *s1++;
+	while (*s2)
+		result[i++] = *s2++;
+	result[i] = '\0';
+	return (result);
 }

@@ -5,25 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:28:23 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:28:24 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:30:56 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:30:58 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(char *s1, char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t i;
+	unsigned char	*u1;
+	unsigned char	*u2;
+	unsigned int	i;
 
+	u1 = (unsigned char *)s1;
+	u2 = (unsigned char *)s2;
 	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && i < n)
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	while (u1[i] != 0 && u2[i] != 0 && u1[i] == u2[i] && i < n)
 		i++;
-	}
-	if (i != n)
-		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	return (0);
+	if (n == i)
+		return (0);
+	return (u1[i] - u2[i]);
 }

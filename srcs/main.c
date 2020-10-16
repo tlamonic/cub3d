@@ -6,7 +6,7 @@
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:58:11 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/08 20:26:37 by student          ###   ########.fr       */
+/*   Updated: 2020/10/07 16:58:13 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int		main(int ac, char **av)
 		if (screen_shot(&m) < 0)
 			return (exit_all(&m));
 	}
-	exit_all(&m);
+	else
+		exit_all(&m);
 	return (0);
 }

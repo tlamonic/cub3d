@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:22:55 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:22:56 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:27:29 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:27:30 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list *a;
-	t_list *b;
+	t_list *ptr;
 
-	a = new;
-	b = *lst;
-	if (b)
+	if (*lst == NULL || del == NULL)
+		return ;
+	ptr = *lst;
+	while (ptr != NULL)
 	{
-		while (b->next)
-			b = b->next;
-		b->next = a;
+		*lst = ptr;
+		ft_lstdelone(*lst, del);
+		ptr = ptr->next;
 	}
-	else
-		*lst = a;
+	*lst = NULL;
 }

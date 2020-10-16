@@ -5,14 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:22:23 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:22:24 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:20:04 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:20:04 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_isascii(int c)
 {
-	if ((c >= 0) && (c < 128))
-		return (1);
-	return (0);
+	if (!(c >= 0 && c <= 127))
+		return (0);
+	return (1);
 }

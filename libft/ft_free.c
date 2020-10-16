@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:28:35 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:28:36 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:19:21 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:19:24 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+char	**ft_free(char **array, int size)
 {
-	char		*d;
-	const char	*s;
-	int			i;
+	int	i;
 
-	d = dest;
-	s = src;
 	i = 0;
-	if (dest == NULL && src == NULL)
-		return (NULL);
-	if (dest == NULL)
-		return (NULL);
-	while (n--)
+	while (i < size)
 	{
-		d[i] = s[i];
+		free(array[i]);
 		i++;
 	}
-	return (dest);
+	free(array);
+	return (NULL);
 }

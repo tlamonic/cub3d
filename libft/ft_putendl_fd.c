@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:26:37 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:26:38 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:29:08 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:29:11 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	if (s)
+	if (s != NULL)
 	{
 		write(fd, s, ft_strlen(s));
 		write(fd, "\n", 1);
 	}
+	else
+		return ;
 }

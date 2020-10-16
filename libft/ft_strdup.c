@@ -5,29 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:27:16 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:27:17 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:30:05 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:30:06 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(char *src)
+char	*ft_strdup(const char *s1)
 {
-	int		i;
-	int		j;
-	char	*s1;
+	char*s2;
+	int i;
 
-	i = 0;
-	while (src[i] != '\0')
-		i++;
-	if (!(s1 = malloc(sizeof(char) * i + 1)))
+	if (!(s2 = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1)))
 		return (0);
-	j = 0;
-	while (j <= i)
+	i = 0;
+	while (s1[i] != '\0')
 	{
-		s1[j] = src[j];
-		j++;
+		s2[i] = s1[i];
+		i++;
 	}
-	return (s1);
+	s2[i] = '\0';
+	return (s2);
 }

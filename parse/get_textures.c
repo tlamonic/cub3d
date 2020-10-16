@@ -6,7 +6,7 @@
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:00:57 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/08 21:20:36 by student          ###   ########.fr       */
+/*   Updated: 2020/10/07 17:00:57 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ char	*get_sprite_texture(t_index *m)
 	int	j;
 	int	count;
 
-	i = 1;
+	i = 2;
 	count = 0;
 	while (m->el.elem[m->el.sprite_line][i] == ' ')
 		i++;

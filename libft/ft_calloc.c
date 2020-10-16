@@ -5,19 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:21:42 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:21:44 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:17:53 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:17:54 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
-	char	*str;
+	char	*ptr;
+	size_t	i;
 
-	if (!(str = malloc(size * nmemb)))
-		return (NULL);
-	ft_bzero(str, size * nmemb);
-	return (str);
+	if (size == 0 || count == 0)
+	{
+		size = 1;
+		count = 1;
+	}
+	if (!(ptr = (char *)malloc(sizeof(char) * (size * count))))
+		return (0);
+	i = 0;
+	ft_bzero(ptr, count * size);
+	return (ptr);
 }

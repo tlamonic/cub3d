@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:23:10 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:23:14 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:31:06 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:31:07 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	t_list	*b;
+	unsigned int i;
 
-	if (!lst)
-		return (0);
-	b = lst;
-	while (b->next)
-		b = b->next;
-	return (b);
+	i = 0;
+	while (src[i] != '\0' && i < len)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (i < len)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+	return (dst);
 }

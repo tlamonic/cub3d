@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:15:07 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:15:09 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 16:56:19 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/08 15:10:32 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,194 +14,220 @@
 # define CUB3D_H
 
 # include <stdlib.h>
-# include "minilibx_mms/mlx.h"
-# include "get_next_line.h"
-# include "libft/libft.h"
-# include <fcntl.h>
-# include <math.h>
-# include <errno.h>
-
+# include <string.h>
 # include <stdio.h>
+# include <unistd.h>
+# include <stdarg.h>
+# include <math.h>
+# include <fcntl.h>
+# include "./libft/libft.h"
+# include "./miniLibX/mlx.h"
 
-typedef struct		s_xpm
+# define WINDOW_TITLE "kvadrat"
+# define MLXK_ESC 53
+# define MLXK_X 17
+# define MLXK_W 13
+# define MLXK_A 0
+# define MLXK_S 1
+# define MLXK_D 2
+# define MLXK_LEFT 123
+# define MLXK_RIGHT 124
+# define MLXK_UP 126
+# define MLXK_DOWN 125
+
+typedef struct		s_win
 {
-	void			*mlx;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-	int				height;
-	int				width;
-	char			name;
-}					t_xpm;
+	void	*mlx_ptr;
+	void	*mlx_win;
+}					t_win;
 
-typedef struct		s_flags
+typedef struct		s_image
 {
-	int				noflag;
-	int				soflag;
-	int				weflag;
-	int				eaflag;
-	int				spriteflag;
-	int				r1flag;
-	int				cellarflag;
-	int				floorflag;
-	int				allflag;
-}					t_flags;
+	void	*img;
+	int		*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}					t_image;
 
-typedef struct		s_sprite
+typedef struct		s_parse
 {
-	double			x;
-	double			y;
-	double			average;
-	double			angle;
-}					t_sprite;
+	char	*data;
+	char	*map_string;
+	char	*map_string_clean;
+	char	**map;
+	int		line_nbr;
+	int		column_nbr;
+	float	pos_x_init;
+	float	pos_y_init;
+	char	dir;
+}					t_parse;
 
-typedef struct		s_data
+typedef struct		s_elements
 {
-	void			*mlx;
-	void			*win;
-	void			*img;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
+	char	**elem;
+	int		resolution_line;
+	int		res_x;
+	int		res_y;
+	int		north_line;
+	int		south_line;
+	int		west_line;
+	int		east_line;
+	int		sprite_line;
+	int		f_l;
+	int		c_l;
+	int		c_r;
+	int		c_g;
+	int		c_b;
+	int		f_r;
+	int		f_g;
+	int		f_b;
+	int		c_color_hex;
+	int		f_color_hex;
+	char	*n_path;
+	char	*s_path;
+	char	*w_path;
+	char	*e_path;
+	char	*spr_path;
+}					t_elements;
 
-	char			**arr;
-	char			**map;
-	double			x;
-	double			y;
-	double			mapx;
-	double			mapy;
-	double			mainangle;
-	int				r1;
-	int				r2;
-	int				coef;
-	int				fulldata;
-	char			*sprite;
-	char			*no;
-	char			*so;
-	char			*we;
-	char			*ea;
-	int				cellar;
-	int				floor;
-	int				num;
-	t_xpm			*notext;
-	t_xpm			*sotext;
-	t_xpm			*wetext;
-	t_xpm			*eatext;
-	t_xpm			*spritetext;
-	t_sprite		*spr;
-	double			*deep;
-	t_flags			*flag;
-}					t_data;
+typedef struct		s_big
+{
+	float				posx;
+	float				posy;
+	float				dirx;
+	float				diry;
+	float				planex;
+	float				planey;
+	float				camerax;
+	float				raydirx;
+	float				raydiry;
+	unsigned int		mapx;
+	unsigned int		mapy;
+	float				sidedistx;
+	float				sidedisty;
+	float				deltadistx;
+	float				deltadisty;
+	float				perpwalldist;
+	int					stepx;
+	int					stepy;
+	int					drawstart;
+	int					drawend;
+	int					wallheight;
+	int					lineheight;
+	int					side;
+	float				movespeed;
+	float				olddirx;
+	float				rotspeed;
+	float				oldplanex;
+}					t_big;
 
-void				ft_putchar(char c);
-void				ft_putnbr(int n);
-void				ft_putstr(char *s);
-void				ft_parser(char **argv, t_data *img);
-int					ft_arrlen(char **arr);
-t_data				*ft_w(t_data *img);
-t_data				*ft_s(t_data *img);
-t_data				*ft_a(t_data *img);
-t_data				*ft_d(t_data *img);
-void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
-t_data				*ft_first_angle(t_data *img);
-void				ft_putwindow(t_data *img);
-void				ft_putwindow_3d(t_data *img);
-void				put_texture(t_data *data);
-int					get_collor(t_xpm *data, int x, int y);
-void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int					ft_setfloorcollor(char **str, t_data *img);
-void				setdata(char **str, t_data *img, t_flags *flag, char *line);
-int					fl_sumflag(t_flags *flag);
-void				ft_cleanflag(t_flags *flag);
-void				freemass(char **str);
-void				ft_lstfree(t_list **list);
-int					ft_arrlen(char **arr);
-int					ft_maxlenarr(char **arr);
-int					ft_checkmap(char **map, t_data *img);
-void				ft_putsprite(t_data *img);
-double				correctangle(double angle);
-double				correctangle1(double angle, double mainangle);
-char				*setno(char **str, t_flags *flag, t_data *img, char *line);
-char				*setwe(char **str, t_flags *flag, t_data *img, char *line);
-char				*setea(char **str, t_flags *flag, t_data *img, char *line);
-char				*setso(char **str, t_flags *flag, t_data *img, char *line);
-char				*setsprite(char **str, t_flags *flag, t_data *img, \
-																	char *line);
-double				ft_foundpixel(int jj, double pixelhiegt, int r2);
-t_xpm				*ft_findwall(t_data *img);
-double				ft_findpartofwall(char wall, double x, double y);
-void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int					get_collor(t_xpm *data, int x, int y);
-int					check_elem(t_data *img, t_sprite *spr, double s);
-int					**ft_malloc_arrayint(int i, int j);
-void				freeintmass(int **arr, int i);
-void				null_mas(t_sprite *spr, int i);
-void				bubblesort(t_sprite *spr, int size);
-double				correctangle(double angle);
-double				correctangle1(double angle, double mainangle);
-int					get_t(int trgb);
-double				ft_angle(char c);
-char				**ft_create_arr(t_list *list, t_flags *flag, t_data *img);
-char				**mallocbigarr(char **arr, t_data *img);
-int					checknwes(char a);
-int					checkunknownsymbol(char **map);
-int					checkunknown(char c);
-int					wallfounder(t_data *img, double c, double angle1);
-void				ft_putsprite(t_data *img);
-void				putsprite(t_data *img, int num);
-void				inittexture(t_data *data);
-void				inittexture2(t_data *data);
-void				inittexture3(t_data *data);
-int					wallfounder(t_data *img, double c, double angle1);
-void				set_start_end(int pixelhiegt, int r2, int *end, int *jj);
-void				freecharmass(char **str, int len);
-int					ft_errnocheck(int er, t_flags *flag, int fd);
-int					ft_intlenn(int n);
-int					countlenarr(char **arr);
-char				*cut_spases(char *str);
-int					get_collordata(t_data *data, int x, int y);
-void				ft_putonelinepixel(t_data *img);
-char				*ft_dostr(char **arr);
-int					ft_checksymbols(char *str);
-void				freecharmass(char **str, int len);
-void				freemass(char **str);
-void				ft_freeall(t_data *img);
-int					my_bmp(t_data *img, int argc, char **argv);
-void				ft_putscreen(t_data *img);
-int					write_collor(t_data *data, int x, int y, int file);
-void				pixelcount(t_data *img, double c, int *i, double angle1);
-void				ft_putline(t_data *img, int i, double pixelhiegt, \
-																double pofw);
-void				putfloor(t_data *img, int i, int jj);
-t_data				*ft_putcol(t_data *img);
-int					printerror(int error);
-int					error_malloc1(void);
-int					error_setdata(t_flags *flag, t_data *img);
-int					error_setdata0(t_flags *flag, t_data *img);
-int					error_setdata1(t_flags *flag, t_data *img);
-int					error_setdatar1(t_flags *flag, t_data *img);
-int					error_setdatar777(t_flags *flag, t_data *img);
-int					error_setdatar99(t_flags *flag, t_data *img);
-int					error_malloc2(t_data *img, char **arr);
-int					error_malloc3(t_data *img, char **arr, char **new, int i);
-int					error_inside(t_flags *flag, t_data *img, char **arr, int i);
-int					cleanmap(t_data *img, int error);
-int					freexmp1(t_data *img);
-int					freexmp2(t_data *img);
-int					freexmp3(t_data *img);
-int					freexmp4(t_data *img);
-int					freexmp5(t_data *img);
-int					freexmp7(t_data *img);
-int					ft_count4(int r);
-void				ft_setsize(unsigned char *s, t_data *img);
-void				ft_setr1(unsigned char *s, int r);
-int					checkmapside(char **arr);
-int					error_map(t_data *img, char **arr);
-void				dostep1(double *c, double x, double y, double angle);
-char				**ft_bigarr(char **arr, t_data *img);
-void				ft_persetdata(t_data *img, t_flags *flag, char *line);
-void				checktrash(char **arr);
+typedef struct		s_tex
+{
+	int		texwidth;
+	int		texheight;
+	void	*color_n;
+	void	*color_s;
+	void	*color_e;
+	void	*color_w;
+	int		texx;
+	int		texy;
+	float	step;
+	float	texpos;
+	int		*color;
+}					t_tex;
+
+typedef struct		s_spr
+{
+	int		numsprites;
+	void	*spr_tex;
+	int		*color;
+	int		sprwidth;
+	int		sprheight;
+	float	spritex;
+	float	spritey;
+	float	invdet;
+	float	transformx;
+	float	transformy;
+	int		spritescreenx;
+	int		drawstarty;
+	int		drawendy;
+	int		drawstartx;
+	int		drawendx;
+	int		stripe;
+	int		texx;
+	int		texy;
+	float	*zbuffer;
+	float	*sprites_x;
+	float	*sprites_y;
+	float	spritedistance;
+	int		vmovescreen;
+}					t_spr;
+
+typedef struct		s_index
+{
+	t_win		win;
+	t_image		img;
+	t_big		big;
+	t_parse		parse;
+	t_elements	el;
+	t_tex		tex;
+	t_spr		spr;
+}					t_index;
+
+void				create_algo(t_index *m);
+int					transform_to_hex(int r, int g, int b);
+int					check_colors(t_index *m);
+int					check_map(char *av);
+void				create_init(t_index *m);
+void				init_5(t_index *m);
+void				init_4(t_index *m);
+void				init_3(t_index *m);
+void				init_2(t_index *m);
+void				init_1(t_index *m);
+int					create_data(t_index *m);
+int					parse_cub(t_index *m, char *filename);
+int					create_map(t_index *m);
+int					create_good_size_map(t_index *m);
+int					check_map_errors(t_index *m);
+int					check_elements_errors(t_index *m);
+int					new_strlen(char *s);
+int					check_borders_lines(t_index *m);
+int					check_borders_columns(t_index *m);
+int					get_elements(t_index *m);
+int					get_resolution(t_index *m);
+int					get_ceilling_color(t_index *m);
+int					get_floor_color(t_index *m);
+int					get_sprites(t_index *m);
+int					check_dir_letter(t_index *m);
+void				parse_sprites(t_index *m);
+int					malloc_size_sprite(t_index *m);
+char				*get_east_texture(t_index *m);
+char				*get_west_texture(t_index *m);
+char				*get_south_texture(t_index *m);
+char				*get_north_texture(t_index *m);
+char				*get_sprite_texture(t_index *m);
+void				calculate_ray_and_deltadist(int i, t_index *m);
+void				calculate_step_and_sidedist(t_index *m);
+void				perform_dda(int hit, t_index *m);
+void				calculate_dist(t_index *m);
+void				calculate_height_wall(t_index *m);
+int					ft_key(int keycode, t_index *m);
+int					exit_all(t_index *m);
+int					generate_textures(t_index *m);
+void				calculate_textures(t_index *m);
+void				calculate_colors(t_index *m);
+void				sprites_raycasting(t_index *m);
+void				verline_sprites(t_index *m);
+int					free_all(t_index *m, int ret);
+void				free_tex(t_index *m);
+void				free_spr(t_index *m);
+int					get_next_line(const int fd, char **line);
+char				**ft_strsplit(const char *s, char c);
+int					screen_shot(t_index *m);
+int					write_error_one(t_index *m);
+int					return_error(t_index *m);
+int					ft_errors(int ac, char **av);
+int					return_error_exit(t_index *m);
 
 #endif

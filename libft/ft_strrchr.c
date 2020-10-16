@@ -5,29 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:28:36 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:28:38 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:31:12 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:31:15 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strrchr(const char *str, int ch)
-{
-	int flag;
+#include "libft.h"
 
-	flag = 0;
-	while (*str)
+char	*ft_strrchr(const char *s, int c)
+{
+	char	*ptr;
+	int		len;
+
+	len = ft_strlen(s);
+	ptr = (char *)s + len - 1;
+	if (c == '\0')
+		return (ptr + 1);
+	while (len > 0)
 	{
-		if (*str == ch)
-			flag = 1;
-		str++;
+		if (*ptr == c)
+			return (ptr);
+		ptr--;
+		len--;
 	}
-	while (flag == 1)
+	if (c == '\0')
 	{
-		if (*str == ch)
-			return ((char *)str);
-		str--;
+		ptr++;
+		return (ptr);
 	}
-	if (ch == '\0')
-		return ((char *)str);
-	return (0);
+	return (NULL);
 }

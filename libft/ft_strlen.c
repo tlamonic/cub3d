@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:27:58 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:27:59 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:30:46 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:30:47 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
-	if (!s)
+	if (s == NULL)
 		return (0);
-	while (s[i] != 0)
+	while (s[i] != '\0')
 		i++;
 	return (i);
 }

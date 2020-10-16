@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:27:38 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:27:40 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:30:35 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:30:36 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,26 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	i;
-	size_t	j;
-	size_t	lends;
+	unsigned int i;
+	unsigned int j;
+	unsigned int k;
 
-	lends = ft_strlen(dst);
-	if (size <= lends)
-		return (ft_strlen(src) + size);
 	i = 0;
-	while (dst[i] && (i < size - 1))
-		i++;
 	j = 0;
-	while (src[j] && (i < size - 1))
-	{
-		dst[i] = src[j];
+	k = 0;
+	while (dst[i] != '\0' && i < size)
 		i++;
+	while (src[j] != '\0')
+		j++;
+	k = i + j;
+	if (i == size)
+		return (k);
+	j = 0;
+	while (src[j] != '\0' && (i + j) < size - 1)
+	{
+		dst[i + j] = src[j];
 		j++;
 	}
-	dst[i] = '\0';
-	return (lends + ft_strlen(src));
+	dst[i + j] = '\0';
+	return (k);
 }

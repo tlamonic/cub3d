@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 19:28:06 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/11 19:28:07 by tlamonic         ###   ########.fr       */
+/*   Created: 2020/10/07 17:30:52 by tlamonic          #+#    #+#             */
+/*   Updated: 2020/10/07 17:30:53 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*str;
-	unsigned	int	i;
+	unsigned int	i;
+	char			*result;
 
-	if (!s)
-		return (NULL);
-	if (!(str = malloc(sizeof(char ) * ft_strlen(s) + 1)))
-		return (NULL);
 	i = 0;
-	while (s[i])
+	if (s == NULL || f == NULL)
+		return (NULL);
+	if (!(result = (char *)malloc(sizeof(char) * ft_strlen(s) + 1)))
+		return (0);
+	while (s[i] != '\0')
 	{
-		str[i] = f(i, s[i]);
+		result[i] = (*f)(i, s[i]);
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	result[i] = '\0';
+	return (result);
 }
