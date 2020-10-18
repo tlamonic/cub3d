@@ -6,7 +6,7 @@
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:01:33 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:01:34 by tlamonic         ###   ########.fr       */
+/*   Updated: 2020/10/18 16:12:57 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*create_new_line(char *str, int diff)
 		new[i] = str[i];
 		i++;
 	}
+	free(str);
 	while (diff > 0)
 	{
 		new[i] = ' ';

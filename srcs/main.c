@@ -6,7 +6,7 @@
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:58:11 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 16:58:13 by tlamonic         ###   ########.fr       */
+/*   Updated: 2020/10/18 17:05:39 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,14 @@ int		main(int ac, char **av)
 		mlx_hook(m.win.mlx_win, 2, 1L << 1, ft_key, &m);
 		mlx_hook(m.win.mlx_win, 17, 0, exit_all, &m);
 		mlx_loop(m.win.mlx_ptr);
+		getchar();
 	}
 	else if (ac == 3 && !ft_strncmp(av[2], "--save", 5))
 	{
 		if ((launch_program(&m, av[1])) < 0)
 			return (exit_all(&m));
+		else
+			getchar();
 		if (screen_shot(&m) < 0)
 			return (exit_all(&m));
 	}

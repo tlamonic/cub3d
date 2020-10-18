@@ -6,7 +6,7 @@
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:57:30 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 16:57:31 by tlamonic         ###   ########.fr       */
+/*   Updated: 2020/10/18 14:25:40 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ int		ft_errors(int ac, char **av)
 		write(1, "Error\nNo such file or directory\n", 32);
 		return (-1);
 	}
+	close(fd);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:01:42 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/07 17:01:42 by tlamonic         ###   ########.fr       */
+/*   Updated: 2020/10/18 16:01:29 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,47 +26,56 @@ int		write_error_one(t_index *m)
 	return (exit_all(m));
 }
 
-int		parse_map(int fd, t_index *m)
+char	*parse_map(int fd, t_index *m)
 {
-	char *line;
+	char	*line;
+	char	*str;
 
 	line = "";
-	m->parse.map_string = "";
+	str = NULL;
 	while (line[0] == '\0')
+	{
 		get_next_line(fd, &line);
-	m->parse.map_string = ft_strjoin(m->parse.map_string, line);
-	m->parse.map_string = ft_strjoin(m->parse.map_string, "\n");
+		if (line[0] == '\0')
+			free(line);
+	}
+	str = ft_strjoin(str, line);
+	str = ft_strjoin(str, "\n");
+	free(line);
 	while (get_next_line(fd, &line))
 	{
 		if (line[0] == '\0')
 			write_error_one(m);
-		m->parse.map_string = ft_strjoin(m->parse.map_string, line);
-		m->parse.map_string = ft_strjoin(m->parse.map_string, "\n");
+		str = ft_strjoin(str, line);
+		str = ft_strjoin(str, "\n");
 		free(line);
 		line = NULL;
 	}
-	m->parse.map_string = ft_strjoin(m->parse.map_string, line);
-	m->parse.map_string = ft_strjoin(m->parse.map_string, "\0");
+	str = ft_strjoin(str, line);
+	str = ft_strjoin(str, "\0");
 	free(line);
 	line = NULL;
-	return (1);
+	return (str);
 }
 
-int		parse_data(int fd, t_index *m)
+char	*parse_data(int fd)
 {
 	char	*line;
+	char	*str;
 	int		i;
 
 	i = 0;
-	m->parse.data = "";
 	while (get_next_line(fd, &line) && i < 7)
 	{
 		if (line[0] == '\0')
+		{
+			free(line);
 			get_next_line(fd, &line);
+		}
 		if (!ft_isdigit(line[0]))
 		{
-			m->parse.data = ft_strjoin(m->parse.data, line);
-			m->parse.data = ft_strjoin(m->parse.data, "\n");
+			str = ft_strjoin(str, line);
+			str = ft_strjoin(str, "\n");
 			free(line);
 			line = NULL;
 			i++;
@@ -74,11 +83,11 @@ int		parse_data(int fd, t_index *m)
 	}
 	while (line[0] == '\0')
 		get_next_line(fd, &line);
-	m->parse.data = ft_strjoin(m->parse.data, line);
-	m->parse.data = ft_strjoin(m->parse.data, "\0");
+	str = ft_strjoin(str, line);
+	str = ft_strjoin(str, "\0");
 	free(line);
 	line = NULL;
-	return (1);
+	return (str);
 }
 
 int		parse_cub(t_index *m, char *filename)
@@ -86,9 +95,9 @@ int		parse_cub(t_index *m, char *filename)
 	int	fd;
 
 	fd = open(filename, O_RDONLY);
-	if (parse_data(fd, m) < 0)
+	if (!(m->parse.data = parse_data(fd)))
 		return (-1);
-	if (parse_map(fd, m) < 0)
+	if (!(m->parse.map_string = parse_map(fd, m)))
 		return (-1);
 	close(fd);
 	if (create_map(m) < 0)
