@@ -6,7 +6,7 @@
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:57:30 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/18 14:25:40 by student          ###   ########.fr       */
+/*   Updated: 2020/10/18 18:58:19 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,16 @@ void	create_init(t_index *m)
 int		ft_errors(int ac, char **av)
 {
 	int fd;
+	int	j;
 
-	if (ac == 1 || ac > 3)
+	j = ft_strlen(av[1]) - 4;
+	if (ac == 1 || ac > 3 || ft_strncmp(&av[1][j], ".cub", 4))
 	{
 		write(1, "Error\nInvalid arguments\n", 24);
 		return (-1);
 	}
-	else if (ac == 3 && (ft_strncmp(av[2], "--save", 6)))
+	else if (ac == 3 && (ft_strncmp(av[2], "--save", 6) ||
+				ft_strlen(av[2]) > 6))
 	{
 		write(1, "Error\nInvalid option\n", 21);
 		return (-1);

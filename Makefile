@@ -23,8 +23,7 @@ SRCS 			= ./srcs/main.c \
 					./srcs/sprites2.c \
 					./srcs/exit.c \
 					./srcs/exit2.c \
-					./srcs/bmp.c \
-					./srcs/check_map.c
+					./srcs/bmp.c
 
 OBJS			= ${SRCS:.c=.o}
 INCLUDE 		= cube3d.h
@@ -42,6 +41,7 @@ $(NAME):		${OBJS}
 				@$(CC) $(MLXFLAGS) $(LIBFLAGS) libft.a libmlx.a -I./ $(OBJS) -o $@ 
 clean:			libft_clean minilibx_clean
 				rm -rf cub3D.dSYM
+				rm -f screenshot.bmp
 				@${RM} ${OBJS}
 fclean:			libft_fclean clean
 				@${RM} ${NAME}

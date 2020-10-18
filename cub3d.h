@@ -6,7 +6,7 @@
 /*   By: tlamonic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 16:56:19 by tlamonic          #+#    #+#             */
-/*   Updated: 2020/10/18 13:10:27 by student          ###   ########.fr       */
+/*   Updated: 2020/10/18 19:20:39 by tlamonic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "./libft/libft.h"
 # include "./miniLibX/mlx.h"
 
-# define WINDOW_TITLE "kvadrat"
+# define WINDOW_TITLE "cub3D"
 # define MLXK_ESC 53
 # define MLXK_X 17
 # define MLXK_W 13
@@ -178,7 +178,6 @@ typedef struct		s_index
 void				create_algo(t_index *m);
 int					transform_to_hex(int r, int g, int b);
 int					check_colors(t_index *m);
-int					check_map(char *av);
 void				create_init(t_index *m);
 void				init_5(t_index *m);
 void				init_4(t_index *m);
